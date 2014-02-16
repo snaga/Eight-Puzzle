@@ -64,9 +64,22 @@ public class TestEightPuzzleSolver {
 
 	@Test
 	public void testSearch() {
+		int[] state = new int[9];
+
+		state[0] = 1;
+		state[1] = 2;
+		state[2] = 0;
+		state[3] = 3;
+		state[4] = 4;
+		state[5] = 5;
+		state[6] = 6;
+		state[7] = 7;
+		state[8] = 8;
+
 		EightPuzzleSolver s = new EightPuzzleSolver();
 		assertNotNull(s);
 
+//		assertEquals(s.search(new EightPuzzle(state, 0)), true);
 		assertEquals(s.search(new EightPuzzle()), true);
 	}
 

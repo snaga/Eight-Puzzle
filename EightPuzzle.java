@@ -2,6 +2,7 @@ import java.lang.Math;
 
 class EightPuzzle {
 	int[] state;
+	int depth;
 
 	public EightPuzzle()
 	{
@@ -16,9 +17,11 @@ class EightPuzzle {
 		state[6] = 8;
 		state[7] = 3;
 		state[8] = 1;
+
+		depth = 0;
 	}
 
-	public EightPuzzle(int[] initialState)
+	public EightPuzzle(int[] initialState, int dep)
 	{
 		state = new int[9];
 
@@ -26,6 +29,8 @@ class EightPuzzle {
 		{
 			state[i] = initialState[i];
 		}
+
+		depth = dep;
 	}
 
 
@@ -194,6 +199,11 @@ class EightPuzzle {
 		return distance;
 	}
 
+	public int getDepth()
+	{
+		return depth;
+	}
+
 	public void printState()
 	{
 		System.out.println("--------------------------");
@@ -220,6 +230,8 @@ class EightPuzzle {
 		state[3*y + x]     = val;
 		state[3*(y+1) + x] = 0;
 
+		depth++;
+
 		return true;
 	}
 
@@ -235,6 +247,8 @@ class EightPuzzle {
 
 		state[3*y + x]     = val;
 		state[3*(y-1) + x] = 0;
+
+		depth++;
 
 		return true;
 	}
@@ -252,6 +266,8 @@ class EightPuzzle {
 		state[3*y + x]   = val;
 		state[3*y + x-1] = 0;
 
+		depth++;
+
 		return true;
 	}
 
@@ -268,20 +284,17 @@ class EightPuzzle {
 		state[3*y + x]   = val;
 		state[3*y + x+1] = 0;
 
+		depth++;
+
 		return true;
 	}
 
 	public EightPuzzle clone()
 	{
-		return new EightPuzzle(state);
+		return new EightPuzzle(state, depth);
 	}
 
 	public int getFValue()
-	{
-		return getFValue(0);
-	}
-
-	public int getFValue(int depth)
 	{
 		return depth + getNumberOfMisplacedTiles()
 		          + getTotalManhattanBlockDistance();

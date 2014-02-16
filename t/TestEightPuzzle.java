@@ -25,7 +25,7 @@ public class TestEightPuzzle {
 		initState[7] = 7;
 		initState[8] = 8;
 
-		EightPuzzle p = new EightPuzzle(initState);
+		EightPuzzle p = new EightPuzzle(initState, 0);
 
 		assertNotNull(p);
 	}
@@ -140,7 +140,7 @@ public class TestEightPuzzle {
 		initState[7] = 7;
 		initState[8] = 8;
 
-		p = new EightPuzzle(initState);
+		p = new EightPuzzle(initState, 0);
 		assertNotNull(p);
 
 		assertEquals(p.isGoalState(), true);
@@ -167,7 +167,7 @@ public class TestEightPuzzle {
 		initState[7] = 7;
 		initState[8] = 8;
 
-		p = new EightPuzzle(initState);
+		p = new EightPuzzle(initState, 0);
 		assertNotNull(p);
 
 		assertEquals(p.getNumberOfMisplacedTiles(), 0);
@@ -177,10 +177,42 @@ public class TestEightPuzzle {
 		initState[7] = 7;
 		initState[8] = 6;
 
-		p = new EightPuzzle(initState);
+		p = new EightPuzzle(initState, 0);
 		assertNotNull(p);
 
 		assertEquals(p.getNumberOfMisplacedTiles(), 2);
+
+		/* test 4: 7 1 2 3 0 4 5 6 8 */
+		initState[0] = 7;
+		initState[1] = 1;
+		initState[2] = 2;
+		initState[3] = 3;
+		initState[4] = 0;
+		initState[5] = 4;
+		initState[6] = 5;
+		initState[7] = 6;
+		initState[8] = 8;
+
+		p = new EightPuzzle(initState, 0);
+		assertNotNull(p);
+
+		assertEquals(p.getNumberOfMisplacedTiles(), 4);
+
+		/* test 5: 0 1 2 7 3 4 5 6 8 */
+		initState[0] = 0;
+		initState[1] = 1;
+		initState[2] = 2;
+		initState[3] = 7;
+		initState[4] = 3;
+		initState[5] = 4;
+		initState[6] = 5;
+		initState[7] = 6;
+		initState[8] = 8;
+
+		p = new EightPuzzle(initState, 0);
+		assertNotNull(p);
+
+		assertEquals(p.getNumberOfMisplacedTiles(), 5);
 	}
 
 	@Test
@@ -218,10 +250,52 @@ public class TestEightPuzzle {
 		initState[7] = 7;
 		initState[8] = 8;
 
-		p = new EightPuzzle(initState);
+		p = new EightPuzzle(initState, 0);
 		assertNotNull(p);
 
 		assertEquals(p.getTotalManhattanBlockDistance(), 0);
+
+		/* test 2: 7 1 2 3 0 4 5 6 8 */
+		initState[0] = 7;
+		initState[1] = 1;
+		initState[2] = 2;
+		initState[3] = 3;
+		initState[4] = 0;
+		initState[5] = 4;
+		initState[6] = 5;
+		initState[7] = 6;
+		initState[8] = 8;
+
+		p = new EightPuzzle(initState, 0);
+		assertNotNull(p);
+
+		assertEquals(p.getTotalManhattanBlockDistance(), 8);
+
+		/* test 4: 0 1 2 7 3 4 5 6 8 */
+		initState[0] = 0;
+		initState[1] = 1;
+		initState[2] = 2;
+		initState[3] = 7;
+		initState[4] = 3;
+		initState[5] = 4;
+		initState[6] = 5;
+		initState[7] = 6;
+		initState[8] = 8;
+
+		p = new EightPuzzle(initState, 0);
+		assertNotNull(p);
+
+		assertEquals(p.getTotalManhattanBlockDistance(), 8);
+	}
+
+	@Test
+	public void testGetDepth() {
+		EightPuzzle p = new EightPuzzle();
+		assertNotNull(p);
+
+		assertEquals(p.getDepth(), 0);
+		assertEquals(p.up(), true);
+		assertEquals(p.getDepth(), 1);
 	}
 
 	@Test
@@ -334,57 +408,59 @@ public class TestEightPuzzle {
 		// [ 7 2 4 ]
 		// [ 5 6 0 ]
 		// [ 8 3 1 ]
-		assertEquals(p.getFValue(), 25);
+		assertEquals(p.getFValue(), 26);
 
 		assertEquals(p.right(), true);
 		// [ 7 2 4 ]
 		// [ 5 0 6 ]
 		// [ 8 3 1 ]
-		assertEquals(p.getFValue(), 26);
+		assertEquals(p.getFValue(), 28);
 
 		assertEquals(p.up(), true);
 		// [ 7 2 4 ]
 		// [ 5 3 6 ]
 		// [ 8 0 1 ]
-		assertEquals(p.getFValue(), 25);
+		assertEquals(p.getFValue(), 28);
 
 		assertEquals(p.down(), true);
 		// [ 7 2 4 ]
 		// [ 5 0 6 ]
 		// [ 8 3 1 ]
-		assertEquals(p.getFValue(), 26);
+		assertEquals(p.getFValue(), 30);
 
-		// with depth
+		/* test 2: 7 1 2 3 0 4 5 6 8 */
+		int[] initState = new int[9];
 
-		// [ 7 2 4 ]
-		// [ 5 0 6 ]
-		// [ 8 3 1 ]
-//		p.printState();
-		assertEquals(p.getFValue(3), 29);
+		initState[0] = 7;
+		initState[1] = 1;
+		initState[2] = 2;
+		initState[3] = 3;
+		initState[4] = 0;
+		initState[5] = 4;
+		initState[6] = 5;
+		initState[7] = 6;
+		initState[8] = 8;
 
-		assertEquals(p.left(), true);
-		// [ 7 2 4 ]
-		// [ 5 6 0 ]
-		// [ 8 3 1 ]
-		assertEquals(p.getFValue(4), 29);
+		p = new EightPuzzle(initState, 0);
+		assertNotNull(p);
 
-		assertEquals(p.right(), true);
-		// [ 7 2 4 ]
-		// [ 5 0 6 ]
-		// [ 8 3 1 ]
-		assertEquals(p.getFValue(5), 31);
+		assertEquals(p.getFValue(), 12);
 
-		assertEquals(p.up(), true);
-		// [ 7 2 4 ]
-		// [ 5 3 6 ]
-		// [ 8 0 1 ]
-		assertEquals(p.getFValue(6), 31);
+		/* test 3: 0 1 2 7 3 4 5 6 8 */
+		initState[0] = 0;
+		initState[1] = 1;
+		initState[2] = 2;
+		initState[3] = 7;
+		initState[4] = 3;
+		initState[5] = 4;
+		initState[6] = 5;
+		initState[7] = 6;
+		initState[8] = 8;
 
-		assertEquals(p.down(), true);
-		// [ 7 2 4 ]
-		// [ 5 0 6 ]
-		// [ 8 3 1 ]
-		assertEquals(p.getFValue(7), 33);
+		p = new EightPuzzle(initState, 0);
+		assertNotNull(p);
+
+		assertEquals(p.getFValue(), 13);
 	}
 }
 
