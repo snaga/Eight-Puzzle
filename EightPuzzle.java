@@ -278,7 +278,12 @@ class EightPuzzle {
 
 	public int getFValue()
 	{
-		return getNumberOfMisplacedTiles()
+		return getFValue(0);
+	}
+
+	public int getFValue(int depth)
+	{
+		return depth + getNumberOfMisplacedTiles()
 		          + getTotalManhattanBlockDistance();
 	}
 }

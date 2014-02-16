@@ -353,6 +353,38 @@ public class TestEightPuzzle {
 		// [ 5 0 6 ]
 		// [ 8 3 1 ]
 		assertEquals(p.getFValue(), 26);
+
+		// with depth
+
+		// [ 7 2 4 ]
+		// [ 5 0 6 ]
+		// [ 8 3 1 ]
+//		p.printState();
+		assertEquals(p.getFValue(3), 29);
+
+		assertEquals(p.left(), true);
+		// [ 7 2 4 ]
+		// [ 5 6 0 ]
+		// [ 8 3 1 ]
+		assertEquals(p.getFValue(4), 29);
+
+		assertEquals(p.right(), true);
+		// [ 7 2 4 ]
+		// [ 5 0 6 ]
+		// [ 8 3 1 ]
+		assertEquals(p.getFValue(5), 31);
+
+		assertEquals(p.up(), true);
+		// [ 7 2 4 ]
+		// [ 5 3 6 ]
+		// [ 8 0 1 ]
+		assertEquals(p.getFValue(6), 31);
+
+		assertEquals(p.down(), true);
+		// [ 7 2 4 ]
+		// [ 5 0 6 ]
+		// [ 8 3 1 ]
+		assertEquals(p.getFValue(7), 33);
 	}
 }
 

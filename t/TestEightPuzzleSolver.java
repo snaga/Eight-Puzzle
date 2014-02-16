@@ -18,7 +18,7 @@ public class TestEightPuzzleSolver {
 		EightPuzzleSolver s = new EightPuzzleSolver();
 		assertNotNull(s);
 
-		ArrayList<EightPuzzle> nodes = s.expandNodes();
+		ArrayList<EightPuzzle> nodes = s.expandNodes(new EightPuzzle());
 
 		assertNotNull(nodes);
 
@@ -33,6 +33,41 @@ public class TestEightPuzzleSolver {
 
 		assertNotNull(nodes.get(3));
 		assertEquals(nodes.get(3).toString(), "[ 7 0 4 5 2 6 8 3 1 ]");
+	}
+
+	@Test
+	public void testAddAllNodes() {
+		EightPuzzleSolver s = new EightPuzzleSolver();
+		assertNotNull(s);
+
+		EightPuzzle node = new EightPuzzle();
+
+		assertEquals(s.addAllNodes(node), true);
+		assertEquals(s.addAllNodes(node), false);
+	}
+
+	@Test
+	public void testNotInAllNodes() {
+		EightPuzzleSolver s = new EightPuzzleSolver();
+		assertNotNull(s);
+
+		EightPuzzle node = new EightPuzzle();
+
+		assertEquals(s.notInAllNodes(node), true);
+
+		assertEquals(s.addAllNodes(node), true);
+
+		assertEquals(s.notInAllNodes(node), false);
+
+		assertEquals(s.addAllNodes(node), false);
+	}
+
+	@Test
+	public void testSearch() {
+		EightPuzzleSolver s = new EightPuzzleSolver();
+		assertNotNull(s);
+
+		assertEquals(s.search(new EightPuzzle()), true);
 	}
 
 }

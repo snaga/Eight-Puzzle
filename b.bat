@@ -1,5 +1,5 @@
-del *.class
-del .\t\*.class
+call c.bat
+
 SET CP=.;.\t;.\t\junit-4.11.jar;.\t\hamcrest-core-1.3.jar
 
 javac -classpath %CP% EightPuzzle.java
