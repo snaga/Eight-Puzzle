@@ -327,7 +327,7 @@ public class TestEightPuzzle {
 		// [ 7 2 4 ]
 		// [ 5 0 6 ]
 		// [ 8 3 1 ]
-		p.printState();
+//		p.printState();
 		assertEquals(p.getFValue(), 26);
 
 		assertEquals(p.left(), true);
